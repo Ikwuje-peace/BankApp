@@ -33,6 +33,7 @@ LOGIN_REDIRECT_URL = '/transactions/report'
 # Application definition
 
 INSTALLED_APPS = [
+    #Default Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,9 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #3rd parties
+     #3rd parties
+    'rest_framework_swagger',
     'django_celery_beat',
     'rest_framework',
+    'rest_framework.authtoken',
+    'allauth', 
+    'allauth.account', 
+    'allauth.socialaccount',
+    'dj_rest_auth',
+    'dj_rest_auth.registration', # new
+    
+   
 
     #Local apps
     'accounts',
@@ -50,6 +60,11 @@ INSTALLED_APPS = [
     'transactions',
      'api',
 ]
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,3 +158,15 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [ # new
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+],
+}
+

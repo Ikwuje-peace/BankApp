@@ -24,5 +24,8 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('admin/', admin.site.urls),
     path('transactions/',include('transactions.urls', namespace='transactions')),
-    path('account_info/',include('api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/dj-rest-auth/registration/',include('dj_rest_auth.registration.urls')),
+    path('api/v1//dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('api/v1/account_info/',include('api.urls')),
 ]

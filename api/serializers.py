@@ -1,17 +1,27 @@
-from dataclasses import field
-from operator import imod
-from unittest.util import _MAX_LENGTH
-from urllib import request
 from rest_framework import serializers
-from accounts.models import UserBankAccount, User
+from accounts.models import UserBankAccount
+from transactions.constants import TRANSACTION_TYPE_CHOICES
 from transactions.models import Transaction
+from transactions.forms import DepositForm
 
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model =  UserBankAccount
-        fields = ('accountName','account_no','balance')
+        fields = ('user','account_no','balance')
 
+class AccountDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ('account','timestamp','transaction_type','amount', 'balance_after_transaction')
+
+class DepositSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = ('transaction_type', 'amount')
+
+class WithdrawSerializer(serializers.ModelSerializer):
+    pass
         
 
 

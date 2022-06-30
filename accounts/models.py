@@ -66,7 +66,7 @@ class BankAccountType(models.Model):
 
 
 class UserBankAccount(models.Model):
-    accountName = models.OneToOneField(
+    user = models.OneToOneField(
         User,
         related_name='account',
         on_delete=models.CASCADE,
