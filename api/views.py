@@ -1,6 +1,6 @@
 from rest_framework import generics
 from accounts.models import UserBankAccount
-from .serializers import AccountSerializer
+from .serializers import  AccountSerializer
 
 # Create your views here.
 

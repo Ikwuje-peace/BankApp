@@ -1,5 +1,4 @@
 from decimal import Decimal
-
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import (
     MinValueValidator,
@@ -67,7 +66,7 @@ class BankAccountType(models.Model):
 
 
 class UserBankAccount(models.Model):
-    user = models.OneToOneField(
+    accountName = models.OneToOneField(
         User,
         related_name='account',
         on_delete=models.CASCADE,
@@ -77,7 +76,7 @@ class UserBankAccount(models.Model):
         related_name='accounts',
         on_delete=models.CASCADE
     )
-    account_no = models.PositiveIntegerField(unique=True, primary_key=True)
+    account_no = models.PositiveIntegerField(unique=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICE)
     birth_date = models.DateField(null=True, blank=True)
     balance = models.DecimalField(
@@ -107,6 +106,8 @@ class UserBankAccount(models.Model):
         )
         start = self.interest_start_date.month
         return [i for i in range(start, 13, interval)]
+    
+    
 
 
 class UserAddress(models.Model):
